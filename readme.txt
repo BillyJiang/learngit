@@ -3,14 +3,14 @@ Git is free software distributed under the GPL.
 
 Git:
     
-安装git软件
+1.安装git软件
     https://git-for-windows.github.io
     安装完成后 开始->Git->Git Bash 
     再设置
         git config --global user.name "Your Name"
         git config --global user.name "email@example.com"
     git config 命令的--global参数 用了这个参数表示这台机器上所有的Git仓库都会使用这个配置。        
-创建版本库
+2.创建版本库
     选择一个地方，创建一个空目录
         mkdir learngit
         cd learngit
@@ -29,7 +29,21 @@ Git:
         git add file1.txt
         git add file2.txt file3.txt
         git commit -m "add 3 files"
+3.时光机穿梭
+    修改readme.txt文件，运行git status命令看看结果。
+    git status 命令可以让我们时刻掌握仓库当前的状态，上面的命令是说 readme.txt被修改过了，但还没有准备提交的修改。
+    如何查看具体修改哪些内容？使用git diff命令
+        git diff readme.txt
+    知道对readme.txt作了什么修改后，再把它提交到仓库就OK了。
+    提交修改和提交新文件是一样的。
+        git add readme.txt
+    再执行git commit 之前，先运行git status看看当前仓库的状态
+        git status 告诉我们，将要被提交的修改包括readme.txt
+    提交后，再用git status 命令看看仓库的当前状态。
+        git status 告诉我们当前没有需要提交的修改，而且，工作目录是干净的。
     
+    
+       
     
     
     
