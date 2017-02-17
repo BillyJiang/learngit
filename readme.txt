@@ -96,6 +96,17 @@ Git:
                 git reset命令既可以回退版本，也可以把暂存区的修改回到工作区。当我们用HEAD时，表示最新的版本。
             再用 git status 查看一下，现在暂存是干净的，工作区有修改。
     3.5删除文件
+        新建文件test.txt,并add到暂存区，再commit到master分支
+            git add test.txt
+            git commit -m "add test.txt"
+        此时你在工作区删除了test文件，或用命令删除了文件 rm test.txt
+            假如是你删错了，可以使用git checkout -- test.txt恢复到最新版本。
+            若不是删错了，你仅仅删除了工作区的test文件，为了和分支保持一致，
+        需要从版本库中删除该文件，使用 git rm删掉，并且git commit。
+            git rm test.txt
+            git commit -m "remove test.txt"
+        这样文件就从版本库中被删除了。
+4.远程仓库        
         
         
         
