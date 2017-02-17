@@ -85,7 +85,17 @@ Git:
     3.3管理修改
         第一次修改->git add ->第二次修改->git add ->git commit 这样才能保证两次修改的内容都能commit中。
         Git是如何跟踪修改的，每次修改，如果不add到暂存区，就不会加入到commit中。
-    3.4
+    3.4撤销修改
+        第一种:如果在工作区修改了文件，还没有add到暂存区。想要撤销修改，使用git status查看一下。
+            Git会告诉你，git checkout -- file 可以丢弃工作区的修改。
+                git checkout -- readme.txt
+              把readme.txt文件在工作区的修改全部撤销。
+        第二种:如果在工作区修改了文件并add 到暂存区，还未commit到分支。使用git status 查看一下，
+            修改只是添加到了暂存区，还没有提交。
+            Git同样告诉我们，用命令git reset HEAD file 可以把暂存区的修改撤销掉(unstage),重新放回工作去。
+                git reset命令既可以回退版本，也可以把暂存区的修改回到工作区。当我们用HEAD时，表示最新的版本。
+            再用 git status 查看一下，现在暂存是干净的，工作区有修改。
+    3.5删除文件
         
         
         
