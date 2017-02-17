@@ -18,3 +18,29 @@ Git:
     pwd命令用于显示当前目录
         git init
     git init 命令把这个目录变成Git可以管理的仓库
+    新建一个readme.txt,把一个文件放到Git仓库只需要两步
+        用命令git add告诉Git，把文件添加到仓库
+            git add readme.txt
+        用命令git commit告诉Git，把文件提交到仓库
+            git commit -m "wrote a readme file"
+        git commit 命令，-m 后面输入的是本次提交的说明，输入有意义的内容，方便从历史记录里方便地找到改动记录
+    为什么Git添加文件需要add,commit 一共两步呢？
+        因为commit可以一次提交很多文件，所以可以多次add不同的文件
+        git add file1.txt
+        git add file2.txt file3.txt
+        git commit -m "add 3 files"
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
