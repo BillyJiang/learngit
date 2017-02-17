@@ -42,7 +42,28 @@ Git:
     提交后，再用git status 命令看看仓库的当前状态。
         git status 告诉我们当前没有需要提交的修改，而且，工作目录是干净的。
     
-    
+    3.1版本回退
+        由于不断在git add 和 git commit已经忘记了每次都改了什么内容。
+        在Git中，我们使用git log命令查看。
+            git log
+        git log命令显示从最近到最远到提交日志。如果嫌输出信息太多，可以试试加上 --pretty=oneline参数。
+            git log --pretty=oneline
+            需要注意的是，前面有一大串数字15ecde84babdb89338f89776edfd400ce58c20dd是commit id(版本号)
+        现在知道所有的版本和版本号。要回退到上个版本或指定版本，怎么办？
+            Git必须知道当前版本是哪个版本？在Git中，用HEAD表示当前版本。上一个版本就是HEAD^,上上一个版本就是HEAD^^
+        往上100个版本写成HEAD~100。
+            
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
        
     
     
