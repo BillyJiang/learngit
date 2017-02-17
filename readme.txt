@@ -106,8 +106,20 @@ Git:
             git rm test.txt
             git commit -m "remove test.txt"
         这样文件就从版本库中被删除了。
-4.远程仓库        
-        
+4.远程仓库
+    只要注册一个GitHub账号，可以免费获得Git远程仓库。
+    由于本地Git仓库和GitHub仓库之间的传输是通过SSH加密的。所以，需要一点设置：
+        第一步:创建SSH Key
+            在"用户主目录"下，看看有没有.ssh目录，如果有，再看看这个目录有无id_rsa和id_rsa.pub两个文件
+        如果已经有，可直接调到下一步。如果没有，打开Git Bash，创建SSH Key:
+            ssh-keygen -t rsa -C "youremail@example.com"
+        一路回车，使用默认值即可。
+        完成之后，可以在用户主目录里找到.ssh目录，里面有id_rsa和id_rsa.pub两个文件，这两个就是SSH key的密钥对
+            id_rsa是私钥，不能泄露出去，id_rsa.pub是公钥，可以放心地告诉任何人。
+        第二步: 注册一个GitHub账号并登陆，打开setting->SSH and GPG keys->New SSH key ->
+            填上任意title，在Key文本框里粘贴id_rsa.pub文件的内容。->add SSH key ->就能看到已经添加的Key
+            当然，GitHub允许你添加多个Key。假定你有若干电脑，你一会儿在公司提交，一会儿在家里提交，只要把
+        每台电脑的Key都添加到GitHub，就可以在每台电脑上往GitHub推送了。
         
         
         
