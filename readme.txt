@@ -51,8 +51,8 @@ Git:
             git log --pretty=oneline
             需要注意的是，前面有一大串数字15ecde84babdb89338f89776edfd400ce58c20dd是commit id(版本号)
         现在知道所有的版本和版本号。要回退到上个版本或指定版本，怎么办？
-            Git必须知道当前版本是哪个版本？在Git中，用HEAD表示当前版本。上一个版本就是HEAD^,上上一个版本就是HEAD^^
-        往上100个版本写成HEAD~100。
+            Git必须知道当前版本是哪个版本？在Git中，用HEAD表示当前版本。上一个版本就是HEAD^,上上一个版本
+        就是HEAD^^,往上100个版本写成HEAD~100。
             使用git reset 命令,回退到上一个版本。
                 git reset --hard HEAD^
             再用git log 看看版本库的状态。发现刚才的版本已经不见了?
@@ -123,21 +123,36 @@ Git:
         每台电脑的Key都添加到GitHub，就可以在每台电脑上往GitHub推送了。
     4.1 添加远程库
         现已经在本地创建了一个Git仓库后，又想在GitHub创建一个Git仓库，并且让这两个仓库进行远程同步。
-        登陆GitHub，右上角 New Repository 创建一个新的仓库 ->Repository name 填入learngit，其它默认设置->Create repository 成功创建了一个新的Git仓库
-        目前，在GitHub上的这个learngit仓库还是空的，GitHub告诉我们可以从这个仓库克隆出新的仓库，也可以把一个已有的本地仓库与之关联，然后把本地仓库的
-        内容推送到GitHub仓库。
+        登陆GitHub，右上角 New Repository 创建一个新的仓库 ->Repository name 填入learngit，其它默认
+        设置->Create repository 成功创建了一个新的Git仓库
+        目前，在GitHub上的这个learngit仓库还是空的，GitHub告诉我们可以从这个仓库克隆出新的仓库，也可以
+        把一个已有的本地仓库与之关联，然后把本地仓库的内容推送到GitHub仓库。
             根据GitHub的提示，在本地的learngit仓库下运行命令：
                 git remote add origin https://github.com/BillyJiang/learngit.git
             远程库的名字就是origin(Git默认的叫法，可以更改但origin这个名字一看就知道是远程库)
         下一步就可以把本地库的所有内容推送到远程库上
                 git push -u origin master
             把本地库的内容推送到远程，用git push命令，实际上是把当前分支master推送到远程。
-            由于远程库是空的，我们第一次推送master分支时，加上了-u参数,Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分
-        支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。
+            由于远程库是空的，我们第一次推送master分支时，加上了-u参数,Git不但会把本地的master分支内容推送
+            的远程新的master分支，还会把本地的master分支和远程的master分支关联起来，在以后的推送或者拉取时
+            就可以简化命令。
             推送成功后，可以立刻在GitHub页面中看到远程库的内容已经和本地一样了。
             只要本地作了提交，可通过命令 git push origin master 把本地master分支的最新修改推送到GitHub。
-            
-        
+    
+    4.2从远程库克隆
+        4.1讲了先有本地库，后有远程库的时候，如何关联远程库。
+        假设我们从零开发，那么最好的方式是先创建远程库，然后，从远程库克隆。
+            第一步：登陆GitHub，创建一个新的仓库，名字叫 gitskills
+                我们勾选Initialize this repository with a README，这样GitHub会自动为我们创建一个README.md文件。
+            创建完毕后，可以看到README.md文件
+            现在，远程库已经准备好了。
+            第二步：用命令git clone克隆一个本地库
+                git clone git@github.com:billyjiang/gitskills.git
+                注意把Git库的地址换成你自己的，然后进入gitskills目录看看，已经有README.md文件了。
+            也许你还注意到，GitHub给出的地址不止一个，还可以用https://github.com/billyjiang/gitskills.git这样的地址。
+            实际上，Git支持多种协议，默认的git://使用ssh，但也可以使用https等其他协议。
+                使用https除了速度慢以外，还有个最大的麻烦是每次推送都必须输入口令，但是在某些只开放http端口的公司内部
+            就无法使用ssh协议而只能用https。
         
         
         
