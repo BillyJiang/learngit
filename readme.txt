@@ -1,6 +1,7 @@
-Git is a distributed version control system.
-Git is free software distributed under the GPL.
+廖雪峰老师的Git教程
+    http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000
 
+笔记    
 Git:
     
 1.安装git软件
@@ -120,9 +121,22 @@ Git:
             填上任意title，在Key文本框里粘贴id_rsa.pub文件的内容。->add SSH key ->就能看到已经添加的Key
             当然，GitHub允许你添加多个Key。假定你有若干电脑，你一会儿在公司提交，一会儿在家里提交，只要把
         每台电脑的Key都添加到GitHub，就可以在每台电脑上往GitHub推送了。
-        
-        
-        
+    4.1 添加远程库
+        现已经在本地创建了一个Git仓库后，又想在GitHub创建一个Git仓库，并且让这两个仓库进行远程同步。
+        登陆GitHub，右上角 New Repository 创建一个新的仓库 ->Repository name 填入learngit，其它默认设置->Create repository 成功创建了一个新的Git仓库
+        目前，在GitHub上的这个learngit仓库还是空的，GitHub告诉我们可以从这个仓库克隆出新的仓库，也可以把一个已有的本地仓库与之关联，然后把本地仓库的
+        内容推送到GitHub仓库。
+            根据GitHub的提示，在本地的learngit仓库下运行命令：
+                git remote add origin https://github.com/BillyJiang/learngit.git
+            远程库的名字就是origin(Git默认的叫法，可以更改但origin这个名字一看就知道是远程库)
+        下一步就可以把本地库的所有内容推送到远程库上
+                git push -u origin master
+            把本地库的内容推送到远程，用git push命令，实际上是把当前分支master推送到远程。
+            由于远程库是空的，我们第一次推送master分支时，加上了-u参数,Git不但会把本地的master分支内容推送的远程新的master分支，还会把本地的master分
+        支和远程的master分支关联起来，在以后的推送或者拉取时就可以简化命令。
+            推送成功后，可以立刻在GitHub页面中看到远程库的内容已经和本地一样了。
+            只要本地作了提交，可通过命令 git push origin master 把本地master分支的最新修改推送到GitHub。
+            
         
         
         
