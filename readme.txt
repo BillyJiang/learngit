@@ -225,7 +225,7 @@ Git:
             每个人都在dev分支上工作，每个人都有自己的分支，时不时地往dev分支上合并就可以了。
     5.4 Bug分支
         当你正在dev上做开发(还未提交)的时候，上线软件出现一个bug，这个bug需要立刻解决？
-            先将当前的dev"存"(get stash)起来，再创建一个新的分支issue-101进行修复bug，再合并，最后删除这个分支。
+           先将当前的dev"存"(get stash)起来，再创建一个新的分支issue-101进行修复bug，再合并，最后删除这个分支。
         修复后，再git stash pop,回到之前工作的地方。
             git stash
             将当前工作内容"存"起来
@@ -254,7 +254,26 @@ Git:
             再用git stash list 查看，就看不到任何stash内容。
             可以多次stash，恢复的时候，先用git stash list查看，然后恢复指定的stash，用命令
                 git stash apply stash@{0}
-
+    5.5 Feature分支
+        添加一个新功能时，最好新建一个feature分支，在这个分支上开发，完成后，合并，最后删除feature分支。
+            新功能vulcan(分支命令 feature-vulcan)
+                git checkout -b feature-vulcan
+                git add vulcan.py
+                git status
+                git commit -m "add feature-vulcan"
+            切回dev，准备合并,合并后删除。
+                git checkout dev
+            但这时由于其它原因说这个功能不需要了，立即删除。
+            销毁这个分支
+                git branch -d feature-vulcan
+            销毁失败。feature-vulcan分支还没有被合并，如果删除，将丢失掉修改，
+            如果要强行删除，需要使用命令：
+                git branch -D feature-vulcan
+            note:
+                如果要丢弃一个没有被合并过的分支，可以通过git branch -D <name>强行删除。
+            
+            
+            
             
     
     
