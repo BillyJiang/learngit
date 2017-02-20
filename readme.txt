@@ -185,10 +185,39 @@ Git:
             查看branch
                 git branch
                 只剩下master分支了。
-    5.2解决冲突    
-        
-
-       
+    5.2解决冲突
+        当master分支和新的分支(feature1)各自都分别有了新的提交。
+        这时，Git无法执行"快速合并"，只能试图把各自的修改合并起来，但这种合并就可能会有冲突。
+        文件存在冲突，必须手动解决冲突后再提交。git status 查看冲突的文件。
+        打开冲突的文件：
+            Git用<<<<<<<，=======，>>>>>>>标记出不同分支的内容。
+            修改成一个版本。并提交。
+        用带参数的git log命令可以看到分支的合并情况(分支合并图)：
+            git log --graph --pretty=oneline --abbrev-commit
+            --graph 显示ASCII图形表示的分支合并历史
+            --pretty=oneline 用oneline 将每个提交放在一行显示
+            --abbrev-commit 仅显示SHA-1的前几个字符
+        最后删除feautre1分支
+            git branch -d feature1
+    5.3分支管理策略
+        一般情况下，合并分支时，Git会用Fast forward模式，但这种模式下，删除分支后，会丢掉分支信息。
+        如何从分支历史上看出分支信息？
+            强制禁用Fast forward模式，Git就会在merge时生成一个新的commit。
+        使用 --no-ff方式的git merge
+            创建并切换dev分支
+                git checkout -b dev
+            修改readme.txt文件，并提交一个新的commit
+                git add readme.txt
+                git commit -m "add merge"
+            切换到master
+                git checkout master
+            准备合并dev分支，使用 --no-ff参数，表示禁用Fast forward
+                git merge --no-ff -m "merge with no-ff" dev
+                由于本次合并要创建一个新的commit，所以加上-m参数，把commit描述写进去。
+            合并后，用git log 查看分支历史。
+                git log --graph --pretty-oneline --abbrev-commit
+        分支策略
+            
     
     
     
