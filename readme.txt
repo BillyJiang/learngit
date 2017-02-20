@@ -154,10 +154,37 @@ Git:
                 使用https除了速度慢以外，还有个最大的麻烦是每次推送都必须输入口令，但是在某些只开放http端口的公司内部
             就无法使用ssh协议而只能用https。
 5.分支管理    
-    
+    5.1 创建与合并分支
+        在版本回退里，每次提交，Git都把它们串成一条时间线，这条时间线就是一个分支。
+    master叫主分支。HEAD指向master(指向当前分支)，master指向commit(提交)。
+        创建分支(dev)
+            git branch dev
+        切换分支
+            git checkout dev
+            创建并切换到dev分支(git checkout 命令加上-b参数 表示创建并切换)
+                git checkout -b dev
+        查看分支
+            git branch
+            git branch命令会列出所有分支，当前分支前面会标一个*号。
+            我们就可以在dev分支上正常提交，比如对readme.txt做个修改.
+                creating a new branch is quick.
+        提交
+            git add readme.txt
+            git commit -m "branch test"
+        dev分支的工作完成，我们就可以切换回master分支.
+            git checkout master
+            切换回master分支后，再查看一个readme.txt文件，刚才添加的内容不见了！
+        因为那个提交是在dev分支上，而master分支此刻的提交点并没有变。
         
-        
-        
+        合并？
+            将dev分支的工作成果合并到master分支上
+                git merge dev
+                git merge 命令用于合并指定分支到当前分支。合并后，就可以看到和dev最新提交是一样的。
+            合并完了，就可以删除dev分支了。
+                git branch -d dev
+            查看branch
+                git branch
+                只剩下master分支了。
         
        
     
