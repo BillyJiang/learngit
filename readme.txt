@@ -271,10 +271,110 @@ Git:
                 git branch -D feature-vulcan
             note:
                 如果要丢弃一个没有被合并过的分支，可以通过git branch -D <name>强行删除。
+    5.6多人协作
+        从远程仓库(origin)克隆时，Git自动把本地的master分支和远程的master分支一一对应起来。
+        查看远程库的信息: git remote    
+        显示更详细(抓取fetch和推送push)的信息：git remote -v
+        推送分支
+            把该分支上的所有本地提交推送到远程库。
+            比如：
+                推送master分支：git push origin master
+                推送dev分支：git push origin dev
+            master分支是主分支，要时刻与远程同步
+            dev分支是开发分支，团队所有成员都需要在上面工作,需要与远程同步；
+        抓取分支
+            多人协作时，大家都会往master和dev分支上推送各自的修改。
+            模拟一个小伙伴，可以在另一台电脑（注意要把SSH Key添加到GitHub）或者同一台电脑的另一个目录下克隆：
+                git clone git@github.com:billyjiang/learngit.git
+            从远程库clone时，默认情况下，只能看到本地的master分支。可用git branch 命令查看。
+                git branch
+            要在dev分支上开发，就必须创建远程origin的dev分支到本地.创建本地dev分支：
+                git checkout -b dev origin/dev
+            创建成功后，可以在dev上继续修改。可以把dev分支push到远程。
+                git add hello.py
+                git commit -m "add /usr/bin/env"
+                git push origin dev
             
+            假如同事已经向origin/dev 分支推送了提交，这时，你也对同样的文件作了修改并推送：
+                git add hello.py
+                git commit -m "add coding:utf-8"
+                git push origin dev
+            推送失败，由于你的同事的最新提交和你试图推送的提交有冲突，如何解决？
+                先用git pull 把最想的提交从origin/dev抓下来，再本地合并，解决冲突，再推送。
+                    git pull
+                git pull 也失败了，由于没有指定本地dev分支与远程origin/dev分支的链接
+                根据提示，设置dev和origin/dev的链接：
+                    git branch --set-upstream dev origin/dev
+                再pull
+                    git pull
+                这时git pull 成功，合并有冲突，需要手动解决。解决后，提交，再push.
+                    git commit -m "merge and fix hello.py"
+                    git push origin dev
+        多人协作的工作模式，通常是这样的：
+            (1)可以试图用git push origin branch-name 推送自己的修改
+            (2)如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并；
+            (3)如果合并有冲突，则解决冲突，并在本地提交；
+            (4)没有冲突或者解决掉冲突后，再用git push origin branch-name推送就能成功
+            (5)如果git pull提示“no tracking information”，则说明本地分支和远程分支的链接关系没有创建
+               用命令git branch --set-upstream branch-name origin/branch-name
+6.标签管理
+    发布一个版本时，我们通常先在版本库中打一个标签（tag），这样，就唯一确定了打标签时刻的版本
+    6.1创建标签
+        切换到需要打标签(master)的分支上
+            git branch
+            git checkout master
+        使用命令 git tag <name> 打一个新标签
+            git tag v1.0
+        查看所有标签
+            git tag
+        默认标签是打在最新提交的commit上的。
+        昨天发布的版本，忘了打标签，今天想起来了，怎么做？
+            找到历史提交的commit id，然后打上就可以了
+                git log --pretty=oneline --abbrev-commit
+            比方说commit id(6224937)
+                git tag v0.9 6224937
+            用命令git tag 查看标签
+                git tag
+        标签不是按时间顺序列出，而是按字母排序的。
+        查看标签信息(git show <tagname>)
+            git show v0.9
+        创建带有说明的标签 -a指定标签名 -m 指定说明文字
+            git tag -a v0.1 -m "version 0.1 released" 3628164
+        通过-s用私钥签名一个标签
+            git tag -s v0.2 -m "signed version 0.2 released" fec145a
+        签名采用PGP签名，必须首先安装gpg（GnuPG），如果没有找到gpg，或者没有gpg密钥对，就会报错
+        用命令git show <tagname>可以看到PGP签名信息
+            git show v0.2
+        用PGP签名的标签是不可伪造的，因为可以验证PGP签名。
+    6.2操作标签
+        标签打错了，可以删除？
+            git tag -d v0.1
+        创建的标签都只存储在本地，不会自动推送到远程。所以，打错的标签可以在本地安全删除。
+        推送某个标签到远程，使用命令git push origin <tagname>：
+            git push origin v1.0
+        一次性推送全部尚未推送到远程的本地标签:
+            git push origin --tags
+        如果标签已经推送到远程,如何删除远程标签?
+            先从本地删除
+                git tag -d v0.9
+            再远程删除，删除命令也是push
+                git push origin :refs/tags/v0.9
             
-            
-            
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
