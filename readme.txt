@@ -216,7 +216,7 @@ Git:
                 由于本次合并要创建一个新的commit，所以加上-m参数，把commit描述写进去。
             合并后，用git log 查看分支历史。
                 git log --graph --pretty-oneline --abbrev-commit
-        分支策略
+        分支策略x
             
     
     
