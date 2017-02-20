@@ -185,7 +185,7 @@ Git:
             查看branch
                 git branch
                 只剩下master分支了。
-        
+    5.2解决冲突2    
        
     
     
