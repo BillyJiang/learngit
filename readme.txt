@@ -149,10 +149,10 @@ Git:
             第二步：用命令git clone克隆一个本地库
                 git clone git@github.com:billyjiang/gitskills.git
                 注意把Git库的地址换成你自己的，然后进入gitskills目录看看，已经有README.md文件了。
-            也许你还注意到，GitHub给出的地址不止一个，还可以用https://github.com/billyjiang/gitskills.git这样的地址。
+            也许你还注意到，GitHub给出的地址不止一个，还可以用https://github.com/billyjiang/gitskills.git 。
             实际上，Git支持多种协议，默认的git://使用ssh，但也可以使用https等其他协议。
-                使用https除了速度慢以外，还有个最大的麻烦是每次推送都必须输入口令，但是在某些只开放http端口的公司内部
-            就无法使用ssh协议而只能用https。
+                使用https除了速度慢以外，还有个最大的麻烦是每次推送都必须输入口令，但是在某些只开放http端口的
+            公司内部就无法使用ssh协议而只能用https。
 5.分支管理    
     5.1 创建与合并分支
         在版本回退里，每次提交，Git都把它们串成一条时间线，这条时间线就是一个分支。
@@ -185,7 +185,9 @@ Git:
             查看branch
                 git branch
                 只剩下master分支了。
-    5.2解决冲突2    
+    5.2解决冲突    
+        
+
        
     
     
