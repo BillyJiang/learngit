@@ -217,6 +217,44 @@ Git:
             合并后，用git log 查看分支历史。
                 git log --graph --pretty-oneline --abbrev-commit
         分支策略
+            实际开发中，按照几个基本原则进行分支管理:
+                (1)master 分支应该非常稳定，仅用来发布新版本
+                (2)平时在dev分支上工作，dev分支是不稳定的。比如1.0版本发布时，再把dev分支
+            合并到master上，在master分支发布1.0版本。
+            每个人都在dev分支上工作，每个人都有自己的分支，时不时地往dev分支上合并就可以了。
+    5.4 Bug分支
+        当你正在dev上做开发(还未提交)的时候，上线软件出现一个bug，这个bug需要立刻解决？
+            先将当前的dev"存"(get stash)起来，再创建一个新的分支issue-101进行修复bug，再合并，最后删除这个分支。
+        修复后，再git stash pop,回到之前工作的地方。
+            git stash
+            将当前工作内容"存"起来
+            git status 
+            查看工作区是干净的。
+        假设需要在master分支上修复bug，从master上创建临时分支：
+            切换到master分支
+                git checkout master
+            在master上创建并切换到临时分支issue-101
+                git checkout -b issue-101
+            修复bug后，提交。
+                git add readme.txt
+                git commit -m "fix bug 101"
+            提交后，切换到master分支,完成合并，最后删除issue-101分支。
+                git checkout master
+                git merge --no-ff -m "merged bug fix 101" issue-101
+                git branch -d issue-101
+        回到dev    
+            git checkout dev
+            git status
+            工作区是干净的，如何回到刚才前工作的内容？
+                git stash list 
+            Git把stash内容存在某个地方了，需要恢复一下，有两个办法：
+                一种用 git stash apply 恢复，恢复后，stash内容并不删除，还需用 git stash drop删除。
+                另外一种用 git stash pop 恢复的同时把stash内容删除。
+            再用git stash list 查看，就看不到任何stash内容。
+            可以多次stash，恢复的时候，先用git stash list查看，然后恢复指定的stash，用命令
+                git stash apply stash@{0}
+            
+                
             
     
     
